@@ -1,0 +1,15 @@
+# manually set to .env file
+server:
+  name: ""
+  port: ""
+  version: "v0.0.0"
+log:
+  Level: ""
+mysql:
+  host: 
+  port: 
+  username: 
+  password: 
+  database: 
+  maxidle:  5
+  maxopen:  10
