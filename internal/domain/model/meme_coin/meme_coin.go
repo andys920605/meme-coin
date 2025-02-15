@@ -34,15 +34,15 @@ func NewMemeCoin(name, description string) *MemeCoin {
 }
 
 func Rebuild(
-	id ID, name, description string, popularityScore PopularityScore, CreatedAt, UpdatedAt time.Time) *MemeCoin {
+	id ID, name, description string, popularityScore PopularityScore, createdAt, updatedAt time.Time) *MemeCoin {
 	return &MemeCoin{
 		AggregateRoot:   dddcore.NewAggregateRoot(),
 		ID:              id,
 		Name:            name,
 		Description:     description,
 		PopularityScore: popularityScore,
-		CreatedAt:       CreatedAt,
-		UpdatedAt:       UpdatedAt,
+		CreatedAt:       createdAt,
+		UpdatedAt:       updatedAt,
 	}
 }
 

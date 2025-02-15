@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.4.4
+    container_name: mysql-local
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: meme_coin
+    ports:
+      - "3306:3306"
+    networks:
+      - my_network
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-server
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_NAME=meme-coin-local
+      - SERVER_PORT=8080
+      - SERVER_VERSION=v0.0.0
+      - LOG_LEVEL=debug
+      - MYSQL_HOST=mysql-local
+      - MYSQL_PORT=3306
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=meme_coin
+      - MYSQL_MaxIdle=5
+      - MYSQL_MaxOpen=10
+    command: ["/bin/sh", "-c", "sleep 10 && ./api_server"]
+    networks:
+      - my_network
+    restart: unless-stopped
+
+networks:
+  my_network:
+    driver: bridge

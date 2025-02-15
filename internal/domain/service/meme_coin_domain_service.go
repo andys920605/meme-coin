@@ -29,7 +29,10 @@ func NewMemeCoinDomainService(
 	}
 }
 
-func (s *MemeCoinDomainService) CreateMemeCoin(ctx context.Context, cmd message.CreateMemeCoinCommand) (*meme_coin.MemeCoin, error) {
+func (s *MemeCoinDomainService) CreateMemeCoin(
+	ctx context.Context,
+	cmd message.CreateMemeCoinCommand,
+) (*meme_coin.MemeCoin, error) {
 	var memeCoin *meme_coin.MemeCoin
 	err := s.transactionManager.Execute(ctx, func(txCtx context.Context) error {
 		memeCoin = meme_coin.NewMemeCoin(cmd.Name, cmd.Description)
@@ -45,7 +48,10 @@ func (s *MemeCoinDomainService) CreateMemeCoin(ctx context.Context, cmd message.
 	return memeCoin, nil
 }
 
-func (s *MemeCoinDomainService) GetMemeCoin(ctx context.Context, query message.GetMemeCoinQuery) (*meme_coin.MemeCoin, error) {
+func (s *MemeCoinDomainService) GetMemeCoin(
+	ctx context.Context,
+	query message.GetMemeCoinQuery,
+) (*meme_coin.MemeCoin, error) {
 	id, err := meme_coin.ParseID(query.ID)
 	if err != nil {
 		return nil, errors.Wrap(err, "parse id")

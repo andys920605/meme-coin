@@ -26,7 +26,10 @@ func NewMemeCoinAppService(
 	}
 }
 
-func (s *MemeCoinAppService) CreateMemeCoin(ctx context.Context, cmd message.CreateMemeCoinCommand) (*response.CreateMemeCoin, error) {
+func (s *MemeCoinAppService) CreateMemeCoin(
+	ctx context.Context,
+	cmd message.CreateMemeCoinCommand,
+) (*response.CreateMemeCoin, error) {
 	memeCoin, err := s.memeCoinDomainService.CreateMemeCoin(ctx, cmd)
 	if err != nil {
 		return nil, errors.Wrap(err, "create meme coin")
@@ -36,7 +39,10 @@ func (s *MemeCoinAppService) CreateMemeCoin(ctx context.Context, cmd message.Cre
 	}, nil
 }
 
-func (s *MemeCoinAppService) GetMemeCoin(ctx context.Context, query message.GetMemeCoinQuery) (*response.GetMemeCoin, error) {
+func (s *MemeCoinAppService) GetMemeCoin(
+	ctx context.Context,
+	query message.GetMemeCoinQuery,
+) (*response.GetMemeCoin, error) {
 	memeCoin, err := s.memeCoinDomainService.GetMemeCoin(ctx, query)
 	if err != nil {
 		return nil, errors.Wrap(err, "get meme coin")

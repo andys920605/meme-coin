@@ -18,6 +18,10 @@ test:
 build:
 	go mod tidy
 	go build -o build/api_server cmd/api/main.go
+
+lint:
+	go mod tidy
+	golangci-lint run ./... --timeout=10m
 	
 clean:
 	rm -rf build

@@ -1,0 +1,44 @@
+run:
+  go: '1.22'
+  tests: false
+
+linters:
+  enable:
+    - bodyclose
+    - errcheck
+    - exportloopref
+    - gocritic
+    - gofmt
+    - goprintffuncname
+    - gosimple
+    - govet
+    - lll
+    - ineffassign
+    - misspell
+    - nakedret
+    - rowserrcheck
+    - staticcheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+
+linters-settings:
+  gocritic:
+    disabled-checks:
+      - ifElseChain
+  lll:
+    line-length: 120
+    tab-width: 4
+  funlen:
+    lines: 100
+    statements: 50
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-rules:
+    - linters:
+        - lll
+      source: "^// "

@@ -13,8 +13,9 @@ type TransactionManager interface {
 }
 
 type TxFunc func(ctx context.Context) error
+type transactionKeyType struct{}
 
-const transactionKey string = "dbTransaction"
+var transactionKey = transactionKeyType{}
 
 type GormTransactionManager struct {
 	db *gorm.DB
@@ -26,13 +27,12 @@ func NewGormTransactionManager(db *gorm.DB) TransactionManager {
 
 func (tm *GormTransactionManager) Execute(ctx context.Context, fn TxFunc) error {
 	return tm.db.Transaction(func(tx *gorm.DB) error {
-		ctxWithTx := context.WithValue(ctx, transactionKey, tx)
-		return fn(ctxWithTx)
+		return fn(context.WithValue(ctx, transactionKey, tx))
 	})
 }
 
 func (tm *GormTransactionManager) GetTransaction(ctx context.Context) *gorm.DB {
-	if tx, ok := ctx.Value(transactionKey).(*gorm.DB); ok && tx != nil {
+	if tx, ok := ctx.Value(transactionKey).(*gorm.DB); ok {
 		return tx
 	}
 	return tm.db
