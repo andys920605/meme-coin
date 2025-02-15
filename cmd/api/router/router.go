@@ -39,4 +39,8 @@ func (r *Router) Register(engine *gin.Engine) {
 	normal := engine.Group("/srv", r.interceptorHandler)
 
 	normal.POST("/meme-coins", r.memeCoinHandler.Create)
+	normal.GET("/meme-coins/:id", r.memeCoinHandler.Get)
+	normal.PUT("/meme-coins/:id", r.memeCoinHandler.Update)
+	normal.DELETE("/meme-coins/:id", r.memeCoinHandler.Delete)
+	normal.POST("/meme-coins/:id/poke", r.memeCoinHandler.Poke)
 }

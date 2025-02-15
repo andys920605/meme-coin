@@ -18,5 +18,6 @@ var (
 
 // Logic 809103xxx
 var (
-	NotFound = NewCustomError(809103001, StatusNotFound, "not found")
+	NotFound          = NewCustomError(809103001, StatusNotFound, "not found")
+	NameAlreadyExists = NewCustomError(809103002, StatusConflict, "meme coin with this name already exists")
 )
